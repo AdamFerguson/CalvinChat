@@ -13,6 +13,18 @@ app.get('/', function (req, res) {
 
 io.sockets.on('connection', function(socket) {
   socket.on('message', function(message) {
-    socket.broadcast.emit('message', message);
+    socket.get('nickname', function(err, nickname) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+
+      var data = {nickname: nickname, message: message};
+      socket.broadcast.emit('message', data);
+    });
+  });
+
+  socket.on('set nickname', function(name) {
+    socket.set("nickname",name,function() {});
   });
 });

@@ -9,6 +9,14 @@
 </head>
 <body>
   <script type='text/x-handlebars'>
+    {{#if yourName}}
+      <span>your username is: {{yourName}}</span>
+    {{else}}
+      <span>Enter a username:</span>
+      {{input value=username}}
+      <button {{ action createUsername }}>Create your username</button>
+    {{/if}}
+
     <p><strong>Hi! Type a message</strong></p>
     {{input value=message}}
     <button {{ action sendMessage }}>Send Message</button>
@@ -17,8 +25,11 @@
 
   <script type='text/x-handlebars' data-template-name='messages'>
     <ul>
-      {{#each message in controller}}
-        <li>{{message}}</li>
+      {{#each data in controller}}
+        <li>
+            <strong>{{data.nickname}}:</strong> 
+            {{data.message}}
+        </li>
       {{/each}}
     </ul>
   </script>
