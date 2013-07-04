@@ -10,9 +10,16 @@
 <body>
   <script type='text/x-handlebars'>
     <p><strong>Hi! Type a message</strong></p>
-    <input id='message' type='text'></input>
-    <button id='send-message'>Send Message</button>
-    <ul id='message-list'>
+    {{input value=message}}
+    <button {{ action sendMessage }}>Send Message</button>
+    {{render messages}}
+  </script>
+
+  <script type='text/x-handlebars' data-template-name='messages'>
+    <ul>
+      {{#each message in controller}}
+        <li>{{message}}</li>
+      {{/each}}
     </ul>
   </script>
 
