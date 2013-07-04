@@ -10,3 +10,9 @@ app.use(express.static(__dirname + '/public'));
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
 });
+
+io.sockets.on('connection', function(socket) {
+  socket.on('message', function(message) {
+    socket.broadcast.emit('message', message);
+  });
+});
