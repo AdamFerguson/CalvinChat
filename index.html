@@ -27,36 +27,13 @@
 
   <div id='chat-app' class="container">
   </div>
-  <script type='text/x-handlebars'>
-    {{#if yourName}}
-      <span>your username is: {{yourName}}</span>
-    {{else}}
-      <span>Enter a username:</span>
-      {{input value=username}}
-      <button {{ action createUsername }}>Create your username</button>
-    {{/if}}
 
-    <p><strong>Hi! Type a message</strong></p>
-    {{input value=message}}
-    <button {{ action sendMessage }}>Send Message</button>
-    {{render messages}}
-  </script>
-
-  <script type='text/x-handlebars' data-template-name='messages'>
-    <ul>
-      {{#each data in controller}}
-        <li>
-            <strong>{{data.nickname}}:</strong> 
-            {{data.message}}
-        </li>
-      {{/each}}
-    </ul>
-  </script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0-rc.4/handlebars.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/ember.js/1.0.0-rc.6/ember.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="js/bootstrap.min.js"></script>
+  <script src="js/templates.js"></script>
   <script src="js/app.js"></script>
 
 </body>
