@@ -1,5 +1,7 @@
 
-Chat = Ember.Application.create();
+Chat = Ember.Application.create({
+  rootElement: '#chat-app'
+});
 
 Chat.ApplicationRoute = Ember.Route.extend({
   setupController: function(controller) {
