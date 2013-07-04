@@ -1,11 +1,15 @@
-var express = require('express')
-    , app = express()
-    , server = require('http').createServer(app)
-    , io = require('socket.io').listen(server);
-
-server.listen(9000);
+var express = require('express'), 
+    app = express(),
+    server = require('http').createServer(app),
+    io = require('socket.io').listen(server);
 
 app.use(express.static(__dirname + '/public'));
+app.use(express.logger());
+
+var port = process.env.PORT || 9000;
+server.listen(port, function() {
+  console.log('Server listening on ' + port);
+});
 
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
