@@ -2,7 +2,7 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    clean: ['public/js/templates.js'],
+    clean: ['public/css/app.css','public/js/templates.js'],
     ember_handlebars: {
       compile: {
         options: {
@@ -16,19 +16,27 @@ module.exports = function(grunt) {
         }
       }
     },
+    less: {
+      styles: {
+        files: {
+          'public/css/app.css': ['styles/*.less']
+        }
+      }
+    },
     watch: {
       templates: {
-        files: ['templates/*.handlebars'],
-        tasks: ['buildTemplates']
+        files: ['templates/*.handlebars', 'styles/*.less'],
+        tasks: ['build']
       }
     }
   });
 
   grunt.loadNpmTasks('grunt-ember-handlebars');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('buildTemplates', ['clean','ember_handlebars']);
+  grunt.registerTask('build', ['clean','ember_handlebars', 'less']);
   grunt.registerTask('default', ['watch']);
 
 };

@@ -1,8 +1,10 @@
-<ul>
-  {{#each data in controller}}
-    <li>
-        <strong>{{data.nickname}}:</strong> 
-        {{data.message}}
-    </li>
-  {{/each}}
-</ul>
+<table class='table table-bordered table-striped table-hover messages-table'>
+  <tbody>
+    {{#each data in controller}}
+      <tr>
+        <th>{{data.nickname}}:</th> 
+        <td>{{data.message}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
