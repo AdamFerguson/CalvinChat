@@ -2,10 +2,11 @@
   <h3>Hi {{yourName}}, Type a message</h3>
   {{input value=message}}
   <button {{ action sendMessage }}>Send Message</button>
-{{render messages}}
 {{else}}
   <h3>Enter a username:</h3>
   {{input value=username}}
   <button {{ action createUsername }}>Create your username</button>
 {{/if}}
+
+{{outlet}}
 

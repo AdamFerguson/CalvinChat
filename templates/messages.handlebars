@@ -1,9 +1,17 @@
 <table class='table table-bordered table-striped table-hover messages-table'>
+  <thead>
+    <tr>
+      <th class='message-name'>Name</th>
+      <th class='message-date'>Date</th>
+      <th class='message-content'>Message</th>
+    </tr>
+  </thead>
   <tbody>
-    {{#each data in controller}}
+    {{#each message in controller}}
       <tr>
-        <th>{{data.nickname}}:</th> 
-        <td>{{data.message}}</td>
+        <td class='message-name'>{{message.userName}}:</td> 
+        <td class='message-date'>{{formattedDate message.date}}</td>
+        <td class='message-content'>{{message.content}}</td>
       </tr>
     {{/each}}
   </tbody>

@@ -1,6 +1,31 @@
 
+Ember.Handlebars.registerBoundHelper('formattedDate', function(date) {
+  return moment(date).calendar();
+});
+
 Chat = Ember.Application.create({
-  rootElement: '#chat-app'
+  rootElement: '#chat-app',
+  LOG_TRANSITIONS: true
+});
+
+Chat.Message = Ember.Model.extend({
+  userName: Ember.attr(),
+  content:  Ember.attr(),
+  date:     Ember.attr(Date)
+});
+
+Chat.Message.adapter = Ember.RESTAdapter.create();
+Chat.Message.url = "messages";
+Chat.Message.collectionKey = "messages";
+
+//Chat.Message.adapter = Ember.FixtureAdapter.create();
+/*Chat.Message.FIXTURES = [
+  {id: '1', userName: 'Adam', content: 'Hey there!'},
+  {id: '2', userName: 'Cari', content: 'Hey right back!'}
+];*/
+
+Chat.Router.map(function() {
+  this.route('messages');
 });
 
 Chat.ApplicationRoute = Ember.Route.extend({
@@ -10,9 +35,21 @@ Chat.ApplicationRoute = Ember.Route.extend({
     var messages = this.controllerFor('messages');
 
     socket.on('message', function(data) {
-      console.log(data);
-      messages.pushObject(data);
+      var message = Chat.Message.create(data.message);
+      messages.pushObject(message);
     });
+  }
+});
+
+Chat.MessagesRoute = Ember.Route.extend({
+  setupController: function(controller, model) {
+    model = Chat.Message.find()
+    controller.set('content', model);
+  },
+  events: {
+    error: function(error,transition) {
+      debugger;
+    }
   }
 });
 
@@ -24,9 +61,6 @@ Chat.ApplicationController = Ember.Controller.extend({
     var socket = this.get('socket');
     socket.emit('message', message);
 
-    var data = {nickname: this.get('yourName'), message: message};
-
-    this.get('controllers.messages').pushObject(data);
     this.set('message', null);
   },
 
@@ -36,12 +70,11 @@ Chat.ApplicationController = Ember.Controller.extend({
     
     var socket = this.get('socket');
     socket.emit('set nickname', username);
+    this.transitionToRoute('messages');
   } 
 });
 
-Chat.MessagesController = Ember.ArrayController.extend({});
-
-Chat.ApplicationView = Ember.View.extend({
-  didInsertElement: function() {
-  }
+Chat.MessagesController = Ember.ArrayController.extend({
+  sortProperties: ['date'],
+  sortAscending: false
 });
