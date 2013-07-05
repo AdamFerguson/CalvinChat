@@ -36,15 +36,15 @@ Chat.ApplicationRoute = Ember.Route.extend({
 
     socket.on('message', function(data) {
       var message = Chat.Message.create(data.message);
+      message.set('date', new Date(data.message.date));
       messages.pushObject(message);
     });
   }
 });
 
 Chat.MessagesRoute = Ember.Route.extend({
-  setupController: function(controller, model) {
-    model = Chat.Message.find()
-    controller.set('content', model);
+  model: function() {
+    return Chat.Message.find()
   },
   events: {
     error: function(error,transition) {
