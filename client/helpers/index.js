@@ -1,0 +1,1 @@
+require('./formatted_date');

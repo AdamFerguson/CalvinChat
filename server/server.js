@@ -1,3 +1,5 @@
+var path = require('path');
+
 var express = require('express'), 
     app = express(),
     server = require('http').createServer(app),
@@ -7,7 +9,7 @@ var express = require('express'),
 require('./lib/db');
 require('./lib/authentication');
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.resolve(__dirname + '../../public')));
 app.use(express.logger());
 
 var port = process.env.PORT || 9000;

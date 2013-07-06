@@ -27,6 +27,9 @@
     "grunt-ember-handlebars": "~0.6.0",
     "grunt-contrib-clean": "~0.4.1",
     "grunt-contrib-watch": "~0.4.4",
-    "grunt-contrib-less": "~0.6.2"
+    "grunt-contrib-less": "~0.6.2",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-browserify": "~1.2.0",
+    "coffeeify": "~0.5.1"
   }
 }

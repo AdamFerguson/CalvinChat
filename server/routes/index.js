@@ -1,9 +1,10 @@
+var path = require('path');
 
 var messages = require('./messages');
 var auth     = require('./authentication');
 
 var index = function (req, res) {
-  res.sendfile(process.cwd() + '/index.html');
+  res.sendfile(path.resolve(__dirname + '../../../index.html'));
 };
 
 module.exports = function(app) {
