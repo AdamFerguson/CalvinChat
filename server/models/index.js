@@ -3,4 +3,4 @@
 require('../lib/db');
 
 exports.Message = require('./message');
-exports.User    = require('./User');
+exports.User    = require('./user');
