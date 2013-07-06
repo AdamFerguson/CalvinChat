@@ -4,7 +4,8 @@ var express = require('express'),
     io = require('socket.io').listen(server);
 
 // connect to mongo
-require('./db');
+require('./lib/db');
+require('./lib/authentication');
 
 app.use(express.static(__dirname + '/public'));
 app.use(express.logger());

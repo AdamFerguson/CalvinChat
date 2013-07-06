@@ -1,5 +1,6 @@
 
 // establish connection
-require('../db');
+require('../lib/db');
 
 exports.Message = require('./message');
+exports.User    = require('./User');
